@@ -1,11 +1,12 @@
 {
-  "name": "WebAppsNodeJs",
-  "version": "0.0.0",
-  "description": "WebAppsNodeJs",
+  "name": "nodemockservers",
+  "version": "1.0.0",
+  "description": "Code for mocking web servers blog posts.",
   "main": "app.js",
+  "scripts": {"start": "node app"},
   "author": {
-    "name": "Ernie",
-    "email": ""
+    "name": "Ernie Salazar",
+    "email": "salazare@verizon.net"
   },
   "dependencies": {
     "ws": "^1.0.1"
