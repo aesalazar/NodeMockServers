@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Web Server Mocking: Using Node.js to quickly spin up HTTP and WebSockets servers</title>
+</head>
+<body>
+<div>
+    <button onclick="connect()" style="width: 100px;">Connect</button>
+    <label>- Connect to the WebSocket server</label>
+</div>
+<br/>
+<div>
+    <button onclick="sendMessage()" style="width: 100px;">Send Data</button>
+    <label>- Send some test data</label>
+</div>
+<br/>
+<div>
+    <textarea id="logTextArea" style="width: 95%; height:100px;"></textarea>
+</div>
+
+<script type="text/javascript">
+    var ws;
+    var log = document.getElementById("logTextArea");
+
+    function connect() {
+
+        //Open the connection to the server
+        var endpoint = "ws://localhost:8889/";
+        ws = new WebSocket(endpoint);
+
+        ws.onopen = function(ev) {
+            log.textContent += "WS connection established: " + (ws.readyState === ws.OPEN) + "\n\n";
+        }
+
+        //Listen for responses from the server
+        ws.onmessage = function (ev) {
+            log.textContent += "WS message received from server:\n";
+            log.textContent += ev.data;
+        };
+    }
+
+    function sendMessage() {
+        var data = {
+            source: "ClientWebSocket Application (client)",
+            url: document.URL
+        }
+
+        ws.send(JSON.stringify(data));
+    }
+</script>
+</body>
+</html>
