@@ -32,17 +32,24 @@ function onHttpRequest(request, response) {
 }
 
 http.createServer(onHttpRequest).listen(httpPort);
-
+console.error(`Http Server established at Port: ${httpPort}`);
 
 // Create web socket server
 var WebSocketServer = websocket.Server;
 var wss = new WebSocketServer({ port: wsPort });
+console.error(`WebSocketServer established at Port: ${wsPort}`);
 
 //Wire its handlers
 wss.on('connection', function (ws) {
     //Show the connection has been established in the console
     console.log("\nWS Connection established:");
     console.log(ws.upgradeReq.headers);
+
+    ws.send(JSON.stringify({
+            source: "WebAppsNodeJs Application (server)",
+            port: wsPort,
+            message:"Connected to server!"
+        }));
     
     //Wire the event handlers
     ws.on('message', function (data) {
@@ -56,7 +63,7 @@ wss.on('connection', function (ws) {
             source: "WebAppsNodeJs Application (server)",
             port: wsPort,
             message:"Client Message Received!"
-        }
+        };
         ws.send(JSON.stringify(messageback));
     });
 });
