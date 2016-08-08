@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "ws": "^1.0.1"
+  },
+    "jshintConfig": {
+    "esversion": 6
   }
 }
