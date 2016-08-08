@@ -6,7 +6,7 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/app.js",
-            "stopOnEntry": false,
+            "stopOnEntry": true,
             "args": [],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": null,
@@ -20,6 +20,14 @@
             "externalConsole": false,
             "sourceMaps": false,
             "outDir": null
+        },
+        {
+            "name": "Attach to Node",
+            "type": "node",
+            "request": "attach",
+            "address": "localhost",
+            "port": 5858,
+            "restart": false
         }
     ]
 }
